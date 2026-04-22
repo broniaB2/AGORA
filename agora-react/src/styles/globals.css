@@ -1,0 +1,283 @@
+/* ============================================================
+   globals.css  — Agora shared design tokens & base styles
+   Import this once in main.jsx. All pages use these variables.
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* ── Colours ── */
+  --white: #ffffff;
+
+  --blue-50:  #f0f7ff;
+  --blue-100: #dbeeff;
+  --blue-200: #b8dcff;
+  --blue-300: #7bbfff;
+  --blue-400: #3a9ef5;
+  --blue-500: #1a7fdb;
+  --blue-600: #1362b0;
+  --blue-700: #0e4a85;
+
+  --gray-50:  #f8fafc;
+  --gray-100: #f0f4f8;
+  --gray-200: #e2eaf2;
+  --gray-300: #c8d6e5;
+  --gray-400: #94adc4;
+  --gray-500: #637d98;
+  --gray-600: #4a607a;
+  --gray-700: #344f67;
+  --gray-800: #1e3449;
+  --gray-900: #0f1f2e;
+
+  --green-bg:   #e8f5e8;
+  --green-text: #2d6a2d;
+  --green-mid:  #4caf70;
+
+  --amber-bg:   #fff3e0;
+  --amber-text: #8a5200;
+
+  --red-bg:   #fdeaea;
+  --red-text: #9b2020;
+
+  --purple-bg:   #f0eeff;
+  --purple-text: #4a2db5;
+
+  /* ── Typography ── */
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+
+  /* ── Radii ── */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* ── Shadows ── */
+  --shadow-sm: 0 1px 3px rgba(15, 31, 46, .07);
+  --shadow-md: 0 4px 16px rgba(15, 31, 46, .10);
+  --shadow-lg: 0 12px 36px rgba(15, 31, 46, .14);
+}
+
+/* ── Base ── */
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--blue-50);
+  color: var(--gray-800);
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Shared utility classes ── */
+
+/* Page wrapper — every page uses this */
+.page {
+  padding: 28px 32px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* Section heading */
+.page-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: var(--gray-800);
+  margin-bottom: 4px;
+}
+.page-subtitle {
+  font-size: 14px;
+  color: var(--gray-500);
+}
+
+/* Cards */
+.card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 22px 24px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all .18s;
+  text-decoration: none;
+}
+.btn-primary {
+  background: var(--blue-500);
+  color: #fff;
+}
+.btn-primary:hover {
+  background: var(--blue-600);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+.btn-outline {
+  background: var(--white);
+  color: var(--gray-700);
+  border: 1.5px solid var(--gray-200);
+}
+.btn-outline:hover {
+  border-color: var(--blue-300);
+  color: var(--blue-600);
+}
+.btn-sm {
+  padding: 7px 14px;
+  font-size: 13px;
+}
+.btn-approve {
+  background: var(--green-bg);
+  color: var(--green-text);
+  border: 1.5px solid #b8ddb8;
+}
+.btn-approve:hover { background: #d4eed4; }
+.btn-danger {
+  background: var(--red-bg);
+  color: var(--red-text);
+  border: 1.5px solid #f0c0c0;
+}
+.btn-danger:hover { background: #f9d5d5; }
+.btn:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Status badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .3px;
+}
+.badge-live     { background: var(--green-bg);  color: var(--green-text); }
+.badge-applying { background: var(--amber-bg);  color: var(--amber-text); }
+.badge-upcoming { background: var(--blue-100);  color: var(--blue-700); }
+.badge-screening{ background: var(--purple-bg); color: var(--purple-text); }
+.badge-closed   { background: var(--gray-100);  color: var(--gray-500); }
+
+/* Form fields */
+.field { margin-bottom: 18px; }
+.field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gray-700);
+  margin-bottom: 6px;
+}
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--gray-800);
+  background: var(--white);
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+  resize: vertical;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--blue-400);
+  box-shadow: 0 0 0 3px rgba(58, 158, 245, .10);
+}
+.field input::placeholder,
+.field textarea::placeholder { color: var(--gray-400); }
+.field-note {
+  font-size: 12px;
+  color: var(--gray-400);
+  margin-top: 5px;
+}
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* Modal overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 31, 46, .50);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s;
+}
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.modal {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  width: 100%;
+  max-width: 560px;
+  max-height: 92vh;
+  overflow-y: auto;
+  transform: translateY(20px);
+  transition: transform .25s;
+  box-shadow: var(--shadow-lg);
+}
+.modal-overlay.open .modal { transform: none; }
+
+/* Animations */
+.fade-in { animation: fadeIn .35s ease both; }
+.stagger-1 { animation-delay: .06s; }
+.stagger-2 { animation-delay: .12s; }
+.stagger-3 { animation-delay: .18s; }
+.stagger-4 { animation-delay: .24s; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Progress bar primitive */
+.progress-bar {
+  height: 8px;
+  background: var(--gray-100);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--blue-400), var(--blue-500));
+  transition: width .8s cubic-bezier(.4, 0, .2, 1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .page { padding: 16px; }
+  .field-row { grid-template-columns: 1fr; }
+}
