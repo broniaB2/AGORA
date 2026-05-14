@@ -1,0 +1,10 @@
+{
+  "name": "agora-react-root",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix agora-react",
+    "build": "npm run build --prefix agora-react",
+    "preview": "npm run preview --prefix agora-react",
+    "install:app": "npm install --prefix agora-react"
+  }
+}

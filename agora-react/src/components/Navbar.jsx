@@ -168,7 +168,7 @@ export default function Navbar() {
               className={`${styles.rsBtn} ${user?.role === r ? styles.rsBtnActive : ''}`}
               onClick={() => switchRole(r)}
             >
-              {{ citizen: '🗳️', commission: '⚖️', candidate: '🏅' }[r]} {r}
+              {({ citizen: '🗳️', commission: '⚖️', candidate: '🏅' })[r]} {r}
             </button>
           ))}
         </div>

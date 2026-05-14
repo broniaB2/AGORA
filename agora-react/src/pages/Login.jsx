@@ -1,37 +1,100 @@
-/**
- * FILE: src/pages/Login.jsx
- *
- * HOW TO POPULATE:
- *   1. Open Login.html (already downloaded in this project).
- *   2. Copy everything inside <body> into the return() below as JSX.
- *   3. Move <style> block into Login.module.css and import it.
- *   4. Move <script> logic into useState / useEffect hooks here.
- *
- * JSX CHEATSHEET:
- *   class=""        →  className=""
- *   onclick="fn()"  →  onClick={() => fn()}
- *   for="id"        →  htmlFor="id"
- *   style="k:v"     →  style={{ k: 'v' }}
- *   <br>            →  <br />
- *   user role check →  const { user } = useAuth(); user?.role
- */
-import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext.jsx'
+import styles from '../components/AuthShell.module.css'
+
+const ROLE_ICONS = { citizen: '🗳️', commission: '⚖️', candidate: '🏅' }
 
 export default function Login() {
-  const { user } = useAuth()
+  const { login, switchRole, isAuthenticated } = useAuth()
   const navigate = useNavigate()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  useEffect(() => {
+    if (isAuthenticated) navigate('/dashboard', { replace: true })
+  }, [isAuthenticated, navigate])
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    login(email, password)
+    navigate('/dashboard')
+  }
+
+  function handleDemo(role) {
+    login('demo@agora.test', 'demo')
+    switchRole(role)
+    navigate('/dashboard')
+  }
 
   return (
-    <div className="page fade-in">
-      {/* TODO: paste JSX from Login.html here */}
-      <h1 style={{ fontFamily: 'var(--font-display)', color: 'var(--gray-800)' }}>
-        Login
-      </h1>
-      <p style={{ color: 'var(--gray-500)', marginTop: 8 }}>
-        Paste content from Login.html — see file header for instructions.
-      </p>
+    <div className={styles.viewport}>
+      <div className={styles.brand} aria-hidden>
+        <span className={styles.brandIcon}>🏛️</span>
+        <span className={styles.brandWord}>Agora</span>
+      </div>
+
+      <div className={styles.card}>
+        <h1 className={styles.title}>Welcome back</h1>
+        <p className={styles.lead}>
+          No account yet? <Link to="/register">Register here</Link>
+        </p>
+
+        <form onSubmit={handleSubmit}>
+          <div className={styles.field}>
+            <label htmlFor="login-email">Email address</label>
+            <input
+              id="login-email"
+              type="email"
+              autoComplete="username"
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className={styles.field}>
+            <label htmlFor="login-password">Password</label>
+            <input
+              id="login-password"
+              type="password"
+              autoComplete="current-password"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          <div className={styles.optionsRow}>
+            <label className={styles.remember}>
+              <input type="checkbox" name="remember" />
+              Remember me
+            </label>
+            <button type="button" className={styles.linkMuted}>
+              Forgot password?
+            </button>
+          </div>
+
+          <button type="submit" className={styles.submit}>
+            Sign in to Agora
+          </button>
+        </form>
+
+        <div className={styles.divider}>or try a demo role</div>
+
+        <div className={styles.roleGrid}>
+          {(['citizen', 'commission', 'candidate']).map((role) => (
+            <button
+              key={role}
+              type="button"
+              className={styles.roleTile}
+              onClick={() => handleDemo(role)}
+            >
+              <span className={styles.roleIcon}>{ROLE_ICONS[role]}</span>
+              <span className={styles.roleLabel}>{role}</span>
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }

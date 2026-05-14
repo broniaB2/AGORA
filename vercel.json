@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "npm install --prefix agora-react",
+  "buildCommand": "npm run build --prefix agora-react",
+  "outputDirectory": "agora-react/dist",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}

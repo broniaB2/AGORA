@@ -1,37 +1,37 @@
-/**
- * FILE: src/pages/Schedule.jsx
- *
- * HOW TO POPULATE:
- *   1. Open Schedule.html (already downloaded in this project).
- *   2. Copy everything inside <body> into the return() below as JSX.
- *   3. Move <style> block into Schedule.module.css and import it.
- *   4. Move <script> logic into useState / useEffect hooks here.
- *
- * JSX CHEATSHEET:
- *   class=""        →  className=""
- *   onclick="fn()"  →  onClick={() => fn()}
- *   for="id"        →  htmlFor="id"
- *   style="k:v"     →  style={{ k: 'v' }}
- *   <br>            →  <br />
- *   user role check →  const { user } = useAuth(); user?.role
- */
-import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext.jsx'
+import React from 'react'
+import { elections } from '../data/electionsData.js'
 
 export default function Schedule() {
-  const { user } = useAuth()
-  const navigate = useNavigate()
-
   return (
     <div className="page fade-in">
-      {/* TODO: paste JSX from Schedule.html here */}
-      <h1 style={{ fontFamily: 'var(--font-display)', color: 'var(--gray-800)' }}>
-        Schedule
-      </h1>
-      <p style={{ color: 'var(--gray-500)', marginTop: 8 }}>
-        Paste content from Schedule.html — see file header for instructions.
+      <h1 className="page-title">Election schedule</h1>
+      <p className="page-subtitle" style={{ marginBottom: 28 }}>
+        Key milestones from demo elections — replace with commission calendar feed later.
       </p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+        {elections.map((e) => (
+          <div key={e.id} className="card">
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
+              <span style={{ fontSize: 28 }}>{e.icon}</span>
+              <div>
+                <div style={{ fontWeight: 700, fontSize: 17 }}>{e.title}</div>
+                <div style={{ fontSize: 13, color: 'var(--gray-500)' }}>{e.region}</div>
+              </div>
+            </div>
+            <div style={{ borderLeft: '2px solid var(--gray-200)', paddingLeft: 16 }}>
+              {e.roadmap.map((step, i) => (
+                <div key={i} style={{ marginBottom: 12 }}>
+                  <div style={{ fontSize: 12, color: 'var(--gray-400)', textTransform: 'uppercase', letterSpacing: '.05em' }}>
+                    {step.state === 'done' ? 'Done' : step.state === 'active' ? 'In progress' : 'Upcoming'}
+                  </div>
+                  <div style={{ fontWeight: 500 }}>{step.label}</div>
+                  <div style={{ fontSize: 13, color: 'var(--gray-600)' }}>{step.date}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

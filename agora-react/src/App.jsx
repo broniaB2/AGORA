@@ -59,10 +59,12 @@ function ProtectedRoute() {
 ───────────────────────────────────────────────────────────── */
 function AppLayout() {
   return (
-    <>
+    <div className="app-shell">
       <Navbar />
-      <Outlet />
-    </>
+      <main className="app-main">
+        <Outlet />
+      </main>
+    </div>
   )
 }
 

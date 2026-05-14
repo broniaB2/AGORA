@@ -230,11 +230,13 @@
 /* Role switcher (demo widget) */
 .roleSwitcher {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  bottom: 20px;
+  right: 20px;
+  left: auto;
+  max-width: calc(100vw - 40px);
   background: var(--gray-800);
   border-radius: var(--radius-lg);
-  padding: 14px 18px;
+  padding: 12px 14px;
   box-shadow: var(--shadow-lg);
   z-index: 200;
 }
